@@ -1,0 +1,3 @@
+/cygdrive/c/Users/gollo/OneDrive - Estudiantes ITCR/Universidad/2020 Semestre I/Analisis de algoritmos/Caso4/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/cygdrive/c/Users/gollo/OneDrive - Estudiantes ITCR/Universidad/2020 Semestre I/Analisis de algoritmos/Caso4/cmake-build-debug/CMakeFiles/Caso4.dir
+/cygdrive/c/Users/gollo/OneDrive - Estudiantes ITCR/Universidad/2020 Semestre I/Analisis de algoritmos/Caso4/cmake-build-debug/CMakeFiles/edit_cache.dir

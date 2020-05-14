@@ -1,0 +1,4 @@
+C:\Users\gollo\AppData\Local\JetBrains\CLion2020.1\cygwin_cmake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/cygdrive/c/Users/gollo/OneDrive - Estudiantes ITCR/Universidad/2020 Semestre I/Analisis de algoritmos/Caso4"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /cygdrive/c/Users/gollo/OneDrive - Estudiantes ITCR/Universidad/2020 Semestre I/Analisis de algoritmos/Caso4/cmake-build-debug
