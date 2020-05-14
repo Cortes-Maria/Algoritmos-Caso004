@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/c/Users/gollo/OneDrive - Estudiantes ITCR/Universidad/2020 Semestre I/Analisis de algoritmos/Caso4/FileReader.h
+fstream
+-
+iostream
+-
+vector
+-
+map
+-
+
+/cygdrive/c/Users/gollo/OneDrive - Estudiantes ITCR/Universidad/2020 Semestre I/Analisis de algoritmos/Caso4/main.cpp
+iostream
+-
+FileReader.h
+/cygdrive/c/Users/gollo/OneDrive - Estudiantes ITCR/Universidad/2020 Semestre I/Analisis de algoritmos/Caso4/FileReader.h
+

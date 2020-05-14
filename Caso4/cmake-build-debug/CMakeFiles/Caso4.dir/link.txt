@@ -1,0 +1,1 @@
+/usr/bin/c++.exe -g  -Wl,--enable-auto-import CMakeFiles/Caso4.dir/main.cpp.o  -o Caso4.exe -Wl,--out-implib,libCaso4.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
