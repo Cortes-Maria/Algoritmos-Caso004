@@ -6,8 +6,12 @@
 #include<string>
 #include <list>
 #include <map>
+#include <iostream>
+#include "FileReader.h"
+
 using namespace std;
 struct Node{
+
     string word;
     bool visited;
     //  nodo   peso
@@ -22,17 +26,31 @@ struct Node{
         visited = false;
         adjList =  map<Node*,float>();
     }
+    void printNode(){
+        cout<<word<<endl;
+    }
 };
+
 class Graph{
 public:
-    list<Node*> nodes; //lista con todos los nodos
+    //list<Node*> nodes; //lista con todos los nodos
+    map<string,Node*> nodes;//map con todos los nodos, la key es la palabra que guarda
     int totalWords;
+    Graph(){
+        nodes = map<string,Node*>();
+    }
+    void AddNode(string pWord){
+        Node *newNode = new Node(pWord);
+        nodes.insert({pWord,newNode});
+    }
 
-    void addAdjacency(){
+    void AddAdjacency(){
 
     }
 
-
+    void fillGraphNodes(){
+        l
+    }
 };
 
 
