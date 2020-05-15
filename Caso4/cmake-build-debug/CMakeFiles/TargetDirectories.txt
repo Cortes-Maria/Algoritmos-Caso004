@@ -1,3 +1,0 @@
-/home/ixel/Documents/Case004/Algoritmos-Caso004/Caso4/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/ixel/Documents/Case004/Algoritmos-Caso004/Caso4/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/ixel/Documents/Case004/Algoritmos-Caso004/Caso4/cmake-build-debug/CMakeFiles/Caso4.dir
