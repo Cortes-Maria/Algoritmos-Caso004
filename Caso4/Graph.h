@@ -7,6 +7,8 @@
 #include <list>
 #include <map>
 #include <iostream>
+#include <algorithm>
+#include <vector>
 #include "FileReader.h"
 
 using namespace std;
@@ -14,26 +16,36 @@ struct Node{
 
     string word;
     bool visited;
-    //  nodo   peso
-    map<Node*,float> adjList;
+    //map<int,Node*> adjList;
+    vector<pair<Node*,int>> adjList;
+
     Node(){
         word = "";
         visited = false;
-        adjList = map<Node*,float>();
+        adjList = vector<pair<Node*,int>>();
     }
     Node(string pWord){
         word = pWord;
         visited = false;
-        adjList =  map<Node*,float>();
+        adjList =  vector<pair<Node*,int>>();
     }
     void printNode(){
         cout<<word<<endl;
+    }
+    void updateAdjacencyWeight(Node* destinyNode, int pWeightToAdd ){
+        auto result = find_if(
+                adjList.begin(),
+                adjList.end(),
+                [destinyNode](const auto& mo) {return mo.first == destinyNode; });
+
+        //CHANGE VARIABLE IF FOUND
+        if(result != adjList.end())
+            result->second += pWeightToAdd;
     }
 };
 
 class Graph{
 public:
-    //list<Node*> nodes; //lista con todos los nodos
     map<string,Node*> nodes;//map con todos los nodos, la key es la palabra que guarda
     int totalWords;
     Graph(){
@@ -44,13 +56,19 @@ public:
         nodes.insert({pWord,newNode});
     }
 
-    void AddAdjacency(){
+    void AddAdjacency(Node* pOriginNode, Node* pDestinyNode, int pWeight){
+        pOriginNode->adjList.push_back(make_pair(pDestinyNode,pWeight));
 
     }
+    void updateAdjacencyWeight(string pWord, Node* pDestinyNode, int pWeightToAdd){
+        Node* originNode = nodes.find(pWord)->second;
+        originNode->updateAdjacencyWeight(pDestinyNode,pWeightToAdd);
 
-    void fillGraphNodes(){
-        l
     }
+    bool existNode(string pWord){
+        return nodes.find(pWord) != nodes.end();
+    }
+
 };
 
 

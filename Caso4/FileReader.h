@@ -7,19 +7,30 @@
 #include <iostream>
 #include<vector>
 #include <map>
+#include "Graph.h"
 
 using namespace std;
 
 class FileReader {
     vector<string> terminaciones = {"ar","er","ir","ando","endo","iendo", "ado", "ido","so","cho","ió","izó","eron","aban","aba","ó"};
     vector<string> typos = {",",";",":","<<",".",")","(","»","«"};
-    //lista de palabras que ignorar {"cuando",
+    Graph *graph;
 public:
     ifstream texto;
     string palabraActual;
     map<string,int> nouns;
     FileReader(){
+        graph = new Graph();
         nouns =  map<string,int>();
+        openFile();
+
+        getNouns();
+
+        //prueba
+        printNouns();
+        texto.close();
+    }
+    void openFile(){
         texto.open("C:\\Users\\gollo\\OneDrive - Estudiantes ITCR\\Universidad\\2020 Semestre I\\Analisis de algoritmos\\Caso 004\\Algoritmos-Caso004\\Caso4\\El libro de Urantia.txt");
         //Probar si el archivo se puede abrir
         if (!texto) {
@@ -27,16 +38,8 @@ public:
             exit(1);   // call system to stop
         }
 
-        getNouns();
-
-        printNouns();
-
-
-
-        //cout<<nouns.size()<<endl;
-        texto.close();
     }
-
+    //aquí voy a ir añadiendo las palabras con sus relaciones al grafo
     void getNouns(){
         map<string,int>::iterator findItr;
         while(texto>>palabraActual){
