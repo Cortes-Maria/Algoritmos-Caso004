@@ -20,7 +20,8 @@ public:
     map<string,int> nouns;
     FileReader(){
         nouns =  map<string,int>();
-        texto.open("C:\\Users\\gollo\\OneDrive - Estudiantes ITCR\\Universidad\\2020 Semestre I\\Analisis de algoritmos\\Caso 004\\Algoritmos-Caso004\\Caso4\\El libro de Urantia.txt");
+        texto.open("\\home\\ixel\\Document\\Caso004\\Algoritmos-Caso004\\Caso4\\El libro de Urantia.txt");
+        //texto.open("C:\\Users\\gollo\\OneDrive - Estudiantes ITCR\\Universidad\\2020 Semestre I\\Analisis de algoritmos\\Caso 004\\Algoritmos-Caso004\\Caso4\\El libro de Urantia.txt");
         //Probar si el archivo se puede abrir
         if (!texto) {
             cerr << "Unable to open file El libro de Urantia.txt";

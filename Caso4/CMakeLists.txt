@@ -3,4 +3,4 @@ project(Caso4)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Caso4 main.cpp FileReader.h Graph.h)
+add_executable(Caso4 main.cpp FileReader.h Graph.h Light.h)
