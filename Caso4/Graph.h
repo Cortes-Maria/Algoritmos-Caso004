@@ -29,9 +29,8 @@ struct Node{
         visited = false;
         adjList =  vector<pair<Node*,int>>();
     }
-    void printNode(){
-        cout<<word<<endl;
-    }
+
+
     void updateAdjacencyWeight(Node* destinyNode, int pWeightToAdd ){
         auto result = find_if(
                 adjList.begin(),
@@ -42,6 +41,14 @@ struct Node{
         if(result != adjList.end())
             result->second += pWeightToAdd;
     }
+    bool hasAdjacency(Node* pDestinyNode){
+        for(auto it=adjList.begin();it!=adjList.end();++it){
+            if(it->first == pDestinyNode){
+                return true;
+            }
+        }
+        return false;
+    }
 };
 
 class Graph{
@@ -51,6 +58,7 @@ public:
     Graph(){
         nodes = map<string,Node*>();
     }
+public:
     void AddNode(string pWord){
         Node *newNode = new Node(pWord);
         nodes.insert({pWord,newNode});
@@ -65,10 +73,27 @@ public:
         originNode->updateAdjacencyWeight(pDestinyNode,pWeightToAdd);
 
     }
+    Node *getNode(string pWord){
+        return nodes.find(pWord)->second;
+    }
     bool existNode(string pWord){
         return nodes.find(pWord) != nodes.end();
     }
 
+    void printAdjacency(string pWord){
+        if(existNode(pWord)){
+            Node* node = getNode(pWord);
+            if(node->adjList.empty()){
+                cout<<"no hay relaciones"<<endl;
+            }
+            else{
+                for(int i=0; i<node->adjList.size(); i++){
+                    cout<<node->adjList[i].first->word + " : ";
+                    cout<<node->adjList[i].second << endl;
+                }
+            }
+        }
+    }
 };
 
 
