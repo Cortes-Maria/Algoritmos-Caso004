@@ -7,6 +7,7 @@
 #include "Point.h"
 #include <list>
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 #include <vector>
 
@@ -20,6 +21,7 @@ public:
     vector<float> angles;
     float increment;
     float incrementAngle;
+    vector<Color*> randomColors;
     //int xc, yc;
 
     Circle(){
@@ -27,7 +29,7 @@ public:
         angles = vector<float>();
         increment = 0.3;
         incrementAngle = 0;
-        //xc = yc = 0;
+        randomColors = vector<Color*>();
     }
 
     Circle (int pX, int pY){
@@ -35,8 +37,7 @@ public:
         angles = vector<float>();
         increment = 0.3;
         incrementAngle = 0;
-//        xc = pX;
-//        yc = pY;
+        randomColors = vector<Color*>();
     }
 
     Circle(float pIncrement, float pIncrementAngle, int pX, int pY){
@@ -44,26 +45,24 @@ public:
         angles = vector<float>();
         increment = pIncrement;
         incrementAngle = pIncrementAngle;
-//        xc = pX;
-//        yc = pY;
     }
 
 
-    void generateCircle(int xc, int yc, int radius, int circleSize){
+    void generateCircle(int xc, int yc, int radius, int circleSize, Color *pColor){
         //circleSize = number of ellipses per circumference; radius = radius of the circumference
         for (int i = 0; i<circleSize; i++){
             float angle = ((2*PI)/circleSize)*i; //angle used to place the ellipse
-            coordinates.push_back(new Point(xc+(sin(angle)*radius), yc+(cos(angle))*radius, xc, yc));
+            coordinates.push_back(new Point(xc+(sin(angle)*radius), yc+(cos(angle))*radius, xc, yc, pColor));
             angles.push_back(angle);
         }
     }
 
-    void generateCircles(int numberCircles, int xc, int yc, int radius, int circleSize){
+    void generateCircles(int numberCircles, int xc, int yc, int radius, int circleSize, Color *pColor){
         //numberCircles = k circumferences; circleSize = number of ellipses per circumference
         //xc and yc = coordinates of the center
         int increaseCircles = 1;
         for (int i = 1; i<numberCircles+1; i++){
-            generateCircle(xc, yc, radius*i, circleSize*increaseCircles);
+            generateCircle(xc, yc, radius*i, circleSize*increaseCircles, pColor);
             increaseCircles++; //Used to put more ellipses in the bigger circumference
         }
     }
@@ -71,7 +70,13 @@ public:
     void generateSet(int numberSets, int xc, int yc, int numberCircles, int radius, int circleSize){
         for (int i=0; i<numberSets; i++){
             float angle = ((2*PI)/numberSets)*i;
-            generateCircles(numberCircles, xc + (sin(angle)*circleSize), yc + (cos(angle)*circleSize), radius, circleSize);
+            generateCircles(numberCircles, xc + (sin(angle)*circleSize), yc + (cos(angle)*circleSize), radius, circleSize, randomColors[i]);
+        }
+    }
+
+    void generateRandomColors(int numberSets){
+        for (int i=0; i<numberSets; i++){
+            randomColors.push_back(new Color(rand()%256, rand()%256, rand()%256));
         }
 
     }
@@ -94,7 +99,10 @@ public:
     void printCoordinates(){
         for (int i=0; i<coordinates.size(); i++){
             coordinates[i]->printPoint();
-            cout<<" Angle: "<<angles[i]<<endl;
+            cout<<" Angle: "<<angles[i];
+            cout<<" Color: ";
+            coordinates[i]->color->printColor();
+            cout<<endl;
         }
     }
 };
