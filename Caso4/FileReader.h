@@ -16,16 +16,19 @@ using namespace std;
 class FileReader {
     vector<string> terminaciones = {"ar","er","ir","ando","endo","iendo", "ado", "ido","so","cho","ió","izó","eron","aban","aba","ó"};
     vector<string> typos = {",",";",":","<<",".",")","(","»","«"};
-   public: Graph *graph;
+    vector<string> ignorar = {"como","para","eran","1806"};
+public: Graph *graph;
 public:
     ifstream texto;
     map<string,int> nouns;
     FileReader(){
         graph = new Graph();
-        nouns =  map<string,int>();
+       nouns =  map<string,int>();
 
         openFile();
         processText();
+        graph->setUnderPowerWords();
+        //llenar mi hash con la suma de pesos de cada nodo
 
         texto.close();
     }
@@ -42,6 +45,9 @@ public:
         std::string currentParagraph;
         while (std::getline(texto, currentParagraph))
         {
+            if(currentParagraph.compare("\r") == 0){
+                continue;
+            }
             processParagraph(currentParagraph);
 
         }
@@ -53,7 +59,7 @@ public:
         istringstream ss(pParagraph);
         while(ss >> palabraActual){
             eraseTypo(&palabraActual);
-            if(palabraActual.size() <= 3 || isVerb(palabraActual)){
+            if(palabraActual.size() <= 3 || isVerb(palabraActual) || mustIgnored(palabraActual)){
                 continue;//descarta lo que no sea sustantivo
             }
             else{
@@ -68,21 +74,32 @@ public:
 
     void getRelatedWords(vector<Node*> pCurrentNouns){
         for(int i=0; i<pCurrentNouns.size(); i++){
-            Node *currentNode = graph->getNode(pCurrentNouns[i]->word);
+            //Node *currentNode = graph->getNode(pCurrentNouns[i]->word);
+            Node *currentNode = pCurrentNouns[i];
             if(currentNode == pCurrentNouns.back()){
                 return;
             }
-            auto it = pCurrentNouns.begin();
-            for(int destiny=i+1;(destiny<(i+4)&&it!=pCurrentNouns.end());destiny++){
-                ++it;
+            for(int destiny=i+1;destiny<(i+4);destiny++){
+
                 if(currentNode->hasAdjacency(pCurrentNouns[destiny])){
                     currentNode->updateAdjacencyWeight(pCurrentNouns[destiny],2);
                 }
                 else{
                     graph->AddAdjacency(currentNode, pCurrentNouns[destiny], 1);
                 }
+                if(pCurrentNouns[destiny]==pCurrentNouns.back()){
+                    break;
+                }
             }
         }
+    }
+    bool mustIgnored(string pPalabra){
+        for(auto it=ignorar.begin();it!=ignorar.end();++it){
+            if(pPalabra.compare(*it) == 0){
+                return true;
+            }
+        }
+        return false;
     }
 
 
@@ -96,6 +113,7 @@ public:
         }
         return false;
     }
+
     void eraseTypo(string *pPalabra){
         for(auto it = typos.begin(); it != typos.end(); it++){
             size_t foundtypo = pPalabra->find(*it);
