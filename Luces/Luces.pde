@@ -35,9 +35,9 @@ void draw(){
   }
   
   
-  pushMatrix();
+  //pushMatrix();
 
-  popMatrix();
+  //popMatrix();
   if(t > TWO_PI/circles || t<0){
     increment = -increment;
   }
